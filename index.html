@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能求索：大语言模型与实际应用实训课程设计</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- 首页 -->
+    <section id="home" class="min-h-screen flex flex-col justify-center items-center">
+        <!-- 修改第 16-17 行 -->
+        <h1 class="text-6xl font-bold mb-4 gradient-text typing animate-fade-in">
+            智能求索
+        </h1>
+        <p class="text-xl mb-8 gradient-text typing animate-fade-in" style="animation-delay: 0.5s">
+            大语言模型实训课程
+        </p>
+        <a href="#overview" class="btn animate-fade-in">进入实验室</a>
+    </section>
+
+    <!-- 课程概览 -->
+    <section id="overview" class="min-h-screen py-20 px-10">
+        <h2 class="text-4xl font-bold mb-8 text-center">课程概览</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <!-- 修改为3列布局 -->
+            <div class="card animate-slide-up" data-aos-delay="200">
+                <h3 class="text-2xl font-bold mb-4">大语言模型是什么？</h3>
+                <p>就像人类大脑通过神经元传递信息，大语言模型通过数十亿个‘虚拟神经元’学习文字规律。</p>
+            </div>
+            <div class="card animate-slide-up" data-aos-delay="200">
+                <h3 class="text-2xl font-bold mb-4">为什么重要？</h3>
+                <p>大语言模型在自然语言处理、智能客服、内容生成等领域有广泛应用，推动了人工智能的发展。</p>
+            </div>
+            <div class="card animate-slide-up" data-aos-delay="400">
+                <h3 class="text-2xl font-bold mb-4">如何学习？</h3>
+                <p>通过本实训课程，你将学习大语言模型的原理、训练方法和实际应用，进行虚拟仿真实验。</p>
+            </div>
+        </div>
+        <!-- 实验模块单独放置 -->
+        <div class="card animate-slide-up mt-8 max-w-2xl mx-auto" data-aos-delay="600">
+            <h3 class="text-2xl font-bold mb-4">实验模块</h3>
+            <div class="progress-bar mb-4">
+                <div class="progress-track" style="width: 60%"></div>
+            </div>
+            <p class="text-sm">当前实验进度：3/5 个模块</p>
+            <button class="btn mt-4 w-full" onclick="scrollToLab()">继续实验</button>
+        </div>
+        
+        <!-- 新增实验引导浮层 -->
+        <div class="fixed bottom-8 right-8 bg-white/10 p-4 rounded-full cursor-pointer 
+                hover:bg-white/20 transition-all shadow-lg"
+             onclick="scrollToLab()">
+            <i class="fas fa-arrow-down text-2xl animate-bounce"></i>
+        </div>
+    </section>
+        <!-- 修改第75-84行 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div class="card animate-slide-up group relative">
+                <div class="absolute -top-4 left-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-1 rounded-full text-sm">
+                    核心概念
+                </div>
+                <h3 class="text-2xl font-bold mb-4">大语言模型原理</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-brain text-cyan-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-medium">基于Transformer架构</p>
+                            <p class="text-sm opacity-80">使用多头注意力机制处理序列数据</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-microchip text-purple-400 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-medium">参数量级</p>
+                            <p class="text-sm opacity-80">GPT-3 1750亿参数，PaLM 5400亿参数</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn mt-6" onclick="showModelDiagram()">
+                    <i class="fas fa-project-diagram mr-2"></i>架构图解
+                </button>
+            </div>
+        
+            <div class="card animate-slide-up group relative" data-aos-delay="200">
+                <div class="absolute -top-4 left-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-1 rounded-full text-sm">
+                    应用价值
+                </div>
+                <h3 class="text-2xl font-bold mb-4">技术影响</h3>
+                <div class="space-y-3">
+                    <div class="bg-gray-700/30 p-3 rounded-lg">
+                        <p class="font-medium mb-1">▎自然语言理解</p>
+                        <p class="text-sm opacity-80">文本分类、情感分析、语义解析</p>
+                    </div>
+                    <div class="bg-gray-700/30 p-3 rounded-lg">
+                        <p class="font-medium mb-1">▎内容生成</p>
+                        <p class="text-sm opacity-80">自动写作、代码生成、创意设计</p>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="card animate-slide-up group relative" data-aos-delay="400">
+                <div class="absolute -top-4 left-4 bg-gradient-to-r from-orange-500 to-amber-500 text-white px-4 py-1 rounded-full text-sm">
+                    学习路径
+                </div>
+                <h3 class="text-2xl font-bold mb-4">实训体系</h3>
+                <ol class="space-y-4 relative timeline">
+                    <li class="pl-8 border-l-2 border-orange-400">
+                        <p class="font-medium">基础理论</p>
+                        <p class="text-sm opacity-80">Transformer/注意力机制/Prompt工程</p>
+                    </li>
+                    <li class="pl-8 border-l-2 border-orange-400">
+                        <p class="font-medium">实践训练</p>
+                        <p class="text-sm opacity-80">文本生成/多模态交互/模型微调</p>
+                    </li>
+                    <li class="pl-8 border-l-2 border-orange-400">
+                        <p class="font-medium">部署应用</p>
+                        <p class="text-sm opacity-80">API集成/性能优化/伦理规范</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+</section>
+
+<!-- 模型原理详解 -->
+<section id="explanation" class="min-h-screen py-20 px-10">
+    <h2 class="text-4xl font-bold mb-8 text-center gradient-text">模型原理详解</h2>
+    <div class="flex flex-col md:flex-row gap-8">
+        <!-- 学习路径导航容器 -->
+        <div class="w-full md:w-1/3 space-y-6 flex flex-col">
+            <div class="card p-6 bg-white/5 backdrop-blur-lg flex-grow">
+                <h3 class="text-xl font-bold mb-4 border-l-4 border-orange-500 pl-3">学习路径导航</h3>
+                <ul class="space-y-4">
+                    <!-- 预训练阶段按钮 -->
+                    <li>
+                        <button class="w-full text-left p-3 rounded-lg hover:bg-white/10 transition-all bg-blue-900/20"
+                                onclick="showSection('pretraining')">
+                            <div class="flex items-center">
+                                <i class="fas fa-database text-blue-400 mr-3"></i>
+                                <span>预训练阶段</span>
+                            </div>
+                        </button>
+                    </li>
+                    
+                    <!-- 微调阶段按钮 -->
+                    <li>
+                        <button class="w-full text-left p-3 rounded-lg hover:bg-white/10 transition-all"
+                                onclick="showSection('fine-tuning')">
+                            <div class="flex items-center">
+                                <i class="fas fa-sliders-h text-green-400 mr-3"></i>
+                                <span>微调阶段</span>
+                            </div>
+                        </button>
+                    </li>
+                    
+                    <!-- 推理阶段按钮 -->
+                    <li>
+                        <button class="w-full text-left p-3 rounded-lg hover:bg-white/10 transition-all"
+                                onclick="showSection('inference')">
+                            <div class="flex items-center">
+                                <i class="fas fa-rocket text-purple-400 mr-3"></i>
+                                <span>推理阶段</span>
+                            </div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- 知识图谱容器添加底部间距 -->
+            <div class="card p-6 bg-white/5 backdrop-blur-lg mt-auto"> 
+                <h3 class="text-xl font-bold mb-4 border-l-4 border-orange-500 pl-3">知识图谱</h3>
+                <div class="aspect-w-1 aspect-h-1">
+                    <div id="knowledgeGraph" class="rounded-lg bg-gray-800/50 p-4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 预训练阶段内容 -->
+        <div id="pretraining" class="w-full md:w-2/3 space-y-8 animate-fade-in">
+            <div class="card p-8 bg-gradient-to-br from-blue-900/50 to-transparent">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-database text-blue-400 mr-3"></i>
+                    预训练阶段
+                </h3>
+                <div class="space-y-6">
+                    <!-- 训练目标 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl border-l-4 border-blue-500">
+                        <h4 class="text-lg font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bullseye mr-2 text-blue-300"></i>
+                            训练目标
+                        </h4>
+                        <p class="text-sm leading-relaxed opacity-90">
+                            采用<span class="text-blue-300 font-medium">掩码语言建模(MLM)</span>和
+                            <span class="text-blue-300 font-medium">下一句预测(NSP)</span>双任务目标，
+                            通过交叉熵损失函数优化模型参数，学习词语间<span class="text-blue-300">上下文关系</span>
+                        </p>
+                    </div>
+                
+                    <!-- 训练策略 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-800/30 p-6 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-sync-alt text-green-400 mr-2"></i>
+                                <h4 class="font-semibold">动态批处理</h4>
+                            </div>
+                            <p class="text-xs opacity-75 leading-relaxed">
+                                根据序列长度自动调整批大小（64-512），
+                                最大程度利用显存资源
+                            </p>
+                            <div class="mt-3 h-1 bg-gray-700 rounded-full">
+                                <div class="h-full bg-green-400 rounded-full w-3/4"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-800/30 p-6 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-layer-group text-purple-400 mr-2"></i>
+                                <h4 class="font-semibold">梯度累积</h4>
+                            </div>
+                            <p class="text-xs opacity-75 leading-relaxed">
+                                32步梯度累积策略，有效稳定大规模分布式训练，
+                                批次等效大小可达16k
+                            </p>
+                            <div class="mt-3 h-1 bg-gray-700 rounded-full">
+                                <div class="h-full bg-purple-400 rounded-full w-2/3"></div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 计算资源 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold mb-4 flex items-center">
+                            <i class="fas fa-server text-amber-400 mr-2"></i>
+                            计算资源消耗
+                        </h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span>GPU利用率</span>
+                                    <span>78%</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full">
+                                    <div class="h-full bg-green-400 rounded-full w-4/5"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span>显存占用</span>
+                                    <span>42GB/64GB</span>
+                                </div>
+                                <div class="h-2 bg-gray-700 rounded-full">
+                                    <div class="h-full bg-purple-400 rounded-full w-3/5"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 训练监控 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-semibold flex items-center">
+                                <i class="fas fa-chart-line text-red-400 mr-2"></i>
+                                训练监控
+                            </h4>
+                            <button class="btn btn-sm" onclick="toggleDetails('trainingMetrics', this)">
+                                <i class="fas fa-chevron-down mr-2"></i>
+                                显示技术细节
+                            </button>
+                        </div>
+                        <div id="trainingMetrics" class="overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="space-y-4">
+                                <div class="bg-black/20 p-4 rounded-lg">
+                                    <div class="flex justify-between text-xs mb-2">
+                                        <span>损失函数曲线</span>
+                                        <span>当前loss: 0.03</span>
+                                    </div>
+                                    <div class="training-curve h-20 bg-gradient-to-r from-red-500/30 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 微调阶段内容 -->
+        <div id="fine-tuning" class="hidden w-full md:w-2/3 space-y-8 animate-fade-in">
+            <div class="card p-8 bg-gradient-to-br from-green-900/50 to-transparent">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-sliders-h text-green-400 mr-3"></i>
+                    微调阶段
+                </h3>
+                <div class="space-y-6">
+                    <!-- 微调目标 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl border-l-4 border-green-500">
+                        <h4 class="text-lg font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bullseye mr-2 text-green-300"></i>
+                            微调策略
+                        </h4>
+                        <p class="text-sm leading-relaxed opacity-90">
+                            采用<span class="text-green-300 font-medium">领域适配训练</span>和
+                            <span class="text-green-300 font-medium">任务特定头</span>调整，
+                            通过<span class="text-green-300">低秩适应(LoRA)</span>技术高效更新参数
+                        </p>
+                    </div>
+                
+                    <!-- 训练参数 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-800/30 p-6 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-clock text-purple-400 mr-2"></i>
+                                <h4 class="font-semibold">学习率调整</h4>
+                            </div>
+                            <p class="text-xs opacity-75 leading-relaxed">
+                                余弦衰减调度 (3e-5 → 1e-6)，
+                                结合热启动策略防止震荡
+                            </p>
+                            <div class="mt-3 h-1 bg-gray-700 rounded-full">
+                                <div class="h-full bg-purple-400 rounded-full w-1/2"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-800/30 p-6 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-weight-hanging text-blue-400 mr-2"></i>
+                                <h4 class="font-semibold">参数冻结</h4>
+                            </div>
+                            <p class="text-xs opacity-75 leading-relaxed">
+                                85% 基础模型参数冻结，
+                                仅微调顶层和适配器模块
+                            </p>
+                            <div class="mt-3 h-1 bg-gray-700 rounded-full">
+                                <div class="h-full bg-blue-400 rounded-full w-3/4"></div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- 训练监控 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-semibold flex items-center">
+                                <i class="fas fa-chart-area text-yellow-400 mr-2"></i>
+                                性能指标
+                            </h4>
+                            <button class="btn btn-sm" onclick="toggleDetails('fineTuningMetrics', this)">
+                                <i class="fas fa-chevron-down mr-2"></i>
+                                显示技术细节
+                            </button>
+                        </div>
+                        <div id="fineTuningMetrics" class="overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="space-y-4">
+                                <div class="bg-black/20 p-4 rounded-lg">
+                                    <div class="flex justify-between text-xs mb-2">
+                                        <span>准确率曲线</span>
+                                        <span>当前准确率: 92.4%</span>
+                                    </div>
+                                    <div class="training-curve h-20 bg-gradient-to-r from-yellow-500/30 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推理阶段 -->
+        <div id="inference" class="hidden w-full md:w-2/3 space-y-8 animate-fade-in">
+            <div class="card p-8 bg-gradient-to-br from-purple-900/50 to-transparent">
+                <h3 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-rocket text-purple-400 mr-3"></i>
+                    推理阶段
+                </h3>
+                <div class="space-y-6">
+                    <!-- 推理引擎 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl border-l-4 border-purple-500">
+                        <h4 class="text-lg font-semibold mb-3 flex items-center">
+                            <i class="fas fa-bolt mr-2 text-purple-300"></i>
+                            推理加速
+                        </h4>
+                        <p class="text-sm leading-relaxed opacity-90">
+                            采用<span class="text-purple-300 font-medium">动态批处理</span>和
+                            <span class="text-purple-300 font-medium">Flash Attention 2.0</span>技术，
+                            推理速度提升<span class="text-purple-300">3.2倍</span>
+                        </p>
+                    </div>
+        
+                    <!-- 性能指标 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-800/30 p-6 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-gauge-high text-pink-400 mr-2"></i>
+                                <h4 class="font-semibold">延迟优化</h4>
+                            </div>
+                            <p class="text-xs opacity-75 leading-relaxed">
+                                单请求延迟 ≤ 350ms，
+                                99%请求响应时间 &lt; 1s
+                            </p>
+                            <div class="mt-3 h-1 bg-gray-700 rounded-full">
+                                <div class="h-full bg-pink-400 rounded-full w-4/5"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-800/30 p-6 rounded-xl">
+                            <div class="flex items-center mb-3">
+                                <i class="fas fa-server text-cyan-400 mr-2"></i>
+                                <h4 class="font-semibold">资源效率</h4>
+                            </div>
+                            <p class="text-xs opacity-75 leading-relaxed">
+                                GPU利用率 92%，
+                                峰值显存占用 48GB
+                            </p>
+                            <div class="mt-3 h-1 bg-gray-700 rounded-full">
+                                <div class="h-full bg-cyan-400 rounded-full w-3/4"></div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- 部署监控 -->
+                    <div class="bg-gray-800/30 p-6 rounded-xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h4 class="text-lg font-semibold flex items-center">
+                                <i class="fas fa-chart-pie text-orange-400 mr-2"></i>
+                                服务监控
+                            </h4>
+                            <button class="btn btn-sm" onclick="toggleDetails('inferenceMetrics', this)">
+                                <i class="fas fa-chevron-down mr-2"></i>
+                                显示实时数据
+                            </button>
+                        </div>
+                        <div id="inferenceMetrics" class="overflow-hidden transition-all duration-300 max-h-0">
+                            <div class="space-y-4">
+                                <div class="bg-black/20 p-4 rounded-lg">
+                                    <div class="flex justify-between text-xs mb-2">
+                                        <span>吞吐量 (req/s)</span>
+                                        <span>当前: 142</span>
+                                    </div>
+                                    <div class="training-curve h-20 bg-gradient-to-r from-purple-500/30 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 虚拟实训平台 -->
+<section id="lab" class="min-h-screen py-20 px-4 md:px-10">
+    <h2 class="text-4xl font-bold mb-8 text-center">虚拟实训平台</h2>
+    
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 左侧列 -->
+        <div class="space-y-6">
+            <div class="card bg-gradient-to-br from-gray-800/40 to-gray-900/20 p-6 rounded-2xl shadow-xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-comment-dots text-blue-400 mr-2"></i>
+                    对话交互
+                </h3>
+                <div class="chat-window h-64 bg-gray-900/30 rounded-lg p-4 mb-4 overflow-y-auto" 
+                     id="chatWindow">
+                    <div class="chat-message bot-message">
+                        <p>欢迎来到对话交互实验！请输入你的问题。</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="questionInput" 
+                           class="flex-1 bg-gray-700/20 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+                           placeholder="输入问题...">
+                    <button class="btn hover:-translate-y-0.5 transition-transform" 
+                            onclick="sendQuestion()">
+                        <i class="fas fa-paper-plane mr-2"></i>发送
+                    </button>
+                </div>
+            </div>
+
+            <div class="card bg-gradient-to-br from-gray-800/40 to-gray-900/20 p-6 rounded-2xl shadow-xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-brain text-purple-400 mr-2"></i>
+                    文本生成
+                </h3>
+                <input type="text" id="textInput" 
+                       class="w-full bg-gray-700/20 rounded-lg px-4 py-2 mb-4 focus:ring-2 focus:ring-purple-500"
+                       placeholder="输入提示词（例如：生成一首关于AI的诗）">
+                <button class="btn w-full hover:-translate-y-0.5 transition-transform" 
+                        onclick="generateText()">
+                    <i class="fas fa-magic mr-2"></i>生成文本
+                </button>
+                <div id="generatedText" class="mt-4 bg-gray-900/30 rounded-lg p-4 min-h-[120px]"></div>
+            </div>
+        </div>
+
+        <!-- 右侧列 -->
+        <div class="space-y-6">
+            <div class="card bg-gradient-to-br from-gray-800/40 to-gray-900/20 p-6 rounded-2xl shadow-xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-file-alt text-green-400 mr-2"></i>
+                    文本摘要
+                </h3>
+                <textarea id="summaryInput" rows="4"
+                          class="w-full bg-gray-700/20 rounded-lg px-4 py-2 mb-4 focus:ring-2 focus:ring-green-500"
+                          placeholder="粘贴需要摘要的文本..."></textarea>
+                <button class="btn w-full hover:-translate-y-0.5 transition-transform" 
+                        onclick="generateSummary()">
+                    <i class="fas fa-compress mr-2"></i>生成摘要
+                </button>
+                <div id="summaryResult" class="mt-4 bg-gray-900/30 rounded-lg p-4 min-h-[120px]"></div>
+            </div>
+
+            <div class="card bg-gradient-to-br from-gray-800/40 to-gray-900/20 p-6 rounded-2xl shadow-xl">
+                <h3 class="text-xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-heartbeat text-red-400 mr-2"></i>
+                    情感分析
+                </h3>
+                <textarea id="sentimentInput" rows="3"
+                          class="w-full bg-gray-700/20 rounded-lg px-4 py-2 mb-4 focus:ring-2 focus:ring-red-500"
+                          placeholder="输入需要分析的文本..."></textarea>
+                <button class="btn w-full hover:-translate-y-0.5 transition-transform" 
+                        onclick="analyzeSentiment()">
+                    <i class="fas fa-chart-bar mr-2"></i>分析情感
+                </button>
+                <div id="sentimentResult" class="mt-4 bg-gray-900/30 rounded-lg p-4 min-h-[100px]"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 案例展示 -->
+<section id="cases" class="min-h-screen py-20 px-10">
+    <h2 class="text-4xl font-bold mb-8 text-center">案例展示</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- 智能客服案例 -->
+        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all">
+            <div class="absolute -top-3 right-4">
+                <span class="badge bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">实时响应</span>
+            </div>
+            <h3 class="text-2xl font-bold mb-4 flex items-center">
+                <i class="fas fa-headset text-blue-400 mr-2"></i>
+                智能客服系统
+            </h3>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between text-sm">
+                    <span>平均响应时间</span>
+                    <span class="font-mono">1.2s</span>
+                </div>
+                <div class="progress-bar bg-gray-700/30 rounded-full h-2">
+                    <div class="progress-track bg-blue-400 rounded-full h-2" style="width: 85%"></div>
+                </div>
+                <p class="text-sm opacity-90">支持12种语言的自然对话，准确率92%</p>
+                    <button class="show-details-btn mt-2 relative w-full" 
+                    onclick="toggleCaseDetails(this)"
+                    data-details="支持全天候自动应答，集成知识库实时检索，对话理解准确率较传统系统提升40%">
+                <i class="fas fa-chevron-circle-down mr-1"></i>
+                技术细节
+                <i class="fas fa-caret-down ml-2 text-sm transition-transform duration-200"></i>
+            </button>
+            <div class="details-dropdown max-h-0 overflow-hidden transition-all duration-300">
+                <div class="mt-3 p-3 bg-gray-800/40 rounded-lg text-sm space-y-2">
+                    <div class="flex justify-between">
+                        <span>并发处理能力：</span>
+                        <span class="font-mono">1500+ QPS</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>平均响应时间：</span>
+                        <span class="font-mono">1.2s</span>
+                    </div>
+                    <div class="pt-2 border-t border-gray-600">
+                        采用混合精度推理，结合FP16和INT8量化技术
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 论文辅助案例 -->
+        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all" 
+     data-aos-delay="200">
+        <div class="absolute -top-3 right-4">
+            <span class="badge bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">AI协作</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 flex items-center">
+            <i class="fas fa-graduation-cap text-purple-400 mr-2"></i>
+            学术论文辅助
+        </h3>
+            <div class="space-y-3">
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="text-center p-2 bg-gray-700/20 rounded">
+                        <div class="text-green-400 font-bold">+35%</div>
+                        <div class="text-xs">写作效率</div>
+                    </div>
+                    <div class="text-center p-2 bg-gray-700/20 rounded">
+                        <div class="text-blue-400 font-bold">98%</div>
+                        <div class="text-xs">文献匹配</div>
+                    </div>
+                </div>
+                <p class="text-sm opacity-90">自动生成研究框架，提供参考文献建议</p>
+                <button class="show-details-btn mt-2 relative w-full" 
+                onclick="toggleCaseDetails(this)"
+                data-details="支持Latex格式输出，自动检查学术规范，集成查重系统接口">
+            <i class="fas fa-chevron-circle-down mr-1"></i>
+            核心功能
+            <i class="fas fa-caret-down ml-2 text-sm transition-transform duration-200"></i>
+        </button>
+        <div class="details-dropdown max-h-0 overflow-hidden transition-all duration-300">
+            <div class="mt-3 p-3 bg-gray-800/40 rounded-lg text-sm space-y-2">
+                <div class="flex justify-between">
+                    <span>格式支持：</span>
+                    <span class="font-mono">LaTeX/Markdown/Word</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>查重准确率：</span>
+                    <span class="font-mono">98.7%</span>
+                </div>
+                <div class="pt-2 border-t border-gray-600">
+                    集成Zotero文献管理，支持自动生成参考文献
+                </div>
+            </div>
+        </div>
+
+        <!-- 法律咨询案例 -->
+        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all" 
+     data-aos-delay="400">
+        <div class="absolute -top-3 right-4">
+            <span class="badge bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm">合规验证</span>
+        </div>
+        <h3 class="text-2xl font-bold mb-4 flex items-center">
+            <i class="fas fa-balance-scale text-red-400 mr-2"></i>
+            智能法律咨询
+        </h3>
+            <div class="space-y-3">
+                <div class="flex items-center">
+                    <div class="flex-1 pr-4">
+                        <div class="text-sm mb-1">覆盖法律法规</div>
+                        <div class="text-xl font-bold text-cyan-400">1.2M+</div>
+                    </div>
+                    <div class="flex-1 border-l border-gray-600 pl-4">
+                        <div class="text-sm mb-1">案例库</div>
+                        <div class="text-xl font-bold text-cyan-400">850K+</div>
+                    </div>
+                </div>
+                <p class="text-sm opacity-90">实时更新法律条文，提供相似案例参考</p>
+                <button class="show-details-btn mt-2 relative w-full" 
+                onclick="toggleCaseDetails(this)"
+                data-details="集成2023年最新民法典，支持合同模板自动生成，法律条款引用准确率99.3%">
+            <i class="fas fa-chevron-circle-down mr-1"></i>
+            数据统计
+            <i class="fas fa-caret-down ml-2 text-sm transition-transform duration-200"></i>
+        </button>
+        <div class="details-dropdown max-h-0 overflow-hidden transition-all duration-300">
+            <div class="mt-3 p-3 bg-gray-800/40 rounded-lg text-sm space-y-2">
+                <div class="flex justify-between">
+                    <span>更新频率：</span>
+                    <span class="font-mono">实时同步</span>
+                </div>
+                <div class="flex justify-between">
+                    <span>条款覆盖：</span>
+                    <span class="font-mono">99.3%</span>
+                </div>
+                <div class="pt-2 border-t border-gray-600">
+                    支持合同风险点自动标注和修订建议
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 互动答疑 -->
+<section id="qa" class="min-h-screen py-20 px-10">
+    <h2 class="text-4xl font-bold mb-8 text-center">互动答疑</h2>
+    <div class="accordion space-y-4">
+        <div class="card animate-slide-up">
+            <h3 class="text-2xl font-bold mb-4">常见问题</h3>
+            <div class="accordion-item">
+                <button class="accordion-button" onclick="toggleAccordion(this)">什么是大语言模型？</button>
+                <div class="accordion-content hidden">
+                    <p>大语言模型是一种基于深度学习的人工智能模型，通过大量文本数据训练，能够理解和生成自然语言。</p>
+                </div>
+            </div>
+            <div class="card animate-slide-up" data-aos-delay="200">
+                <h3 class="text-2xl font-bold mb-4">AI 答疑机器人</h3>
+                <div class="chat-window p-4 mb-4 bg-gray-800 rounded" id="qaChatWindow">
+                    <p>有什么问题尽管问我！</p>
+                </div>
+                <input type="text" id="qaQuestionInput" placeholder="输入问题" class="w-full p-2 mb-4 rounded">
+                <button class="btn" onclick="sendQaQuestion()">发送</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="scripts/main.js"></script>
+<script src="scripts/text-generation.js"></script>
+<script src="scripts/chat-interaction.js"></script>
+<script src="scripts/text-summary.js"></script>
+<script src="scripts/sentiment-analysis.js"></script>
+<script src="scripts/qa-interaction.js"></script>
+
+<!-- 音乐控制元素 -->
+<div class="fixed bottom-4 left-4 bg-white/10 p-3 rounded-full cursor-pointer hover:bg-white/20 transition-all"
+     onclick="toggleMusic()">
+    <i id="musicIcon" class="fas fa-music text-xl"></i>
+</div>
+<audio id="bgMusic" loop>
+    <source src="audio/1.mp3" type="audio/mpeg">
+    您的浏览器不支持音频播放
+</audio>
+
+<!-- 在音乐控制元素之后添加 -->
+<div id="modelDiagramModal" class="modal">
+    <div class="modal-content max-w-4xl">
+        <span class="close" onclick="closeModelDiagram()">&times;</span>
+        <h2 class="text-2xl font-bold mb-4 px-4 md:px-0">Transformer 架构详解</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 p-4 md:p-8">
+            <img src="https://bbs-img.huaweicloud.com/blogs/img/20231205/1701742225296515775.png" 
+                 alt="Transformer架构图" 
+                 class="rounded-lg shadow-xl max-w-full h-auto object-contain">
+            <div class="space-y-3 md:space-y-4">
+                <div class="architecture-steps space-y-3 md:space-y-4 overflow-y-auto max-h-[60vh]">
+                    <div class="step bg-gray-100 p-3 md:p-4 rounded-lg">
+                        <h3 class="font-bold text-orange-500 text-sm md:text-base mb-1 md:mb-2">1. 输入处理</h3>
+                        <p class="text-xs md:text-sm">文本通过Tokenization转换为词向量，加入位置编码(Positional Encoding)</p>
+                    </div>
+                    <div class="step bg-gray-100 p-3 md:p-4 rounded-lg">
+                        <h3 class="font-bold text-orange-500 text-sm md:text-base mb-1 md:mb-2">2. 编码器堆叠</h3>
+                        <p class="text-xs md:text-sm">6个相同编码器层的堆叠，每层包含自注意力机制和前馈网络</p>
+                    </div>
+                    <div class="step bg-gray-100 p-3 md:p-4 rounded-lg">
+                        <h3 class="font-bold text-orange-500 text-sm md:text-base mb-1 md:mb-2">3. 自注意力机制</h3>
+                        <p class="text-xs md:text-sm">计算Query、Key、Value矩阵，通过缩放点积注意力获取上下文关联</p>
+                    </div>
+                    <div class="step bg-gray-100 p-3 md:p-4 rounded-lg">
+                        <h3 class="font-bold text-orange-500 text-sm md:text-base mb-1 md:mb-2">4. 前馈网络</h3>
+                        <p class="text-xs md:text-sm">两层全连接网络（通常维度为2048）与ReLU激活函数</p>
+                    </div>
+                    <div class="step bg-gray-100 p-3 md:p-4 rounded-lg">
+                        <h3 class="font-bold text-orange-500 text-sm md:text-base mb-1 md:mb-2">5. 解码器层</h3>
+                        <p class="text-xs md:text-sm">包含带掩码的自注意力机制，防止当前位置关注后续位置</p>
+                    </div>
+                    <!-- 最终输出步骤 -->
+                    <div class="step bg-gray-100 p-3 md:p-4 rounded-lg">
+                        <h3 class="font-bold text-orange-500 text-sm md:text-base mb-1 md:mb-2">6. 输出处理</h3>
+                        <p class="text-xs md:text-sm">线性层映射到词表维度，Softmax生成概率分布</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tooltip"></div>
+<script src="scripts/knowledge-graph.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', initKnowledgeGraph);
+</script>
+</body>
+</html>

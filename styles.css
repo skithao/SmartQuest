@@ -1,0 +1,338 @@
+/* 自定义样式 */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom, #1a237e, #2962ff);
+    color: white;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.btn {
+    background-color: #fb8c00;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #f57c00;
+}
+
+.typing {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(30, end);
+}
+
+/* 在原有 typing 动画后添加 */
+.gradient-text {
+    background: linear-gradient(45deg, #0cc78f, #4ecdc4, #45b7d1);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-flow 4s ease infinite, 
+               text-float 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .gradient-text {
+        font-size: 3rem !important;
+        animation: gradient-flow 4s ease infinite, 
+                   text-float-mobile 3s ease-in-out infinite;
+    }
+}
+
+@keyframes text-float-mobile {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes text-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* 修改原有 typing 动画 */
+@keyframes typing {
+    from { 
+        width: 0;
+        opacity: 0;
+    }
+    to { 
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+/* 动画效果 */
+.animate-fade-in {
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 1s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: black;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 新增进度条样式 */
+.progress-bar {
+    height: 8px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-track {
+    height: 100%;
+    background: #fb8c00;
+    transition: width 0.3s ease;
+}
+
+/* 新增跳动动画 */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.animate-bounce {
+    animation: bounce 1.5s infinite;
+}
+
+/* 在现有进度条样式后添加 */
+.timeline li::before {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    background: #fb8c00;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 1rem;
+}
+
+/* 知识图谱工具提示 */
+#tooltip {
+    @apply absolute bg-gray-800 text-white px-3 py-2 rounded-lg text-sm;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* 在现有过渡样式后添加 */
+.transition-all {
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-100 {
+    opacity: 1;
+}
+
+/* 训练监控可视化 */
+.training-monitor {
+    @apply relative h-32 bg-gray-800/50 rounded-lg p-2;
+    overflow: hidden;
+}
+
+.chart-line {
+    @apply absolute h-1 bg-gradient-to-r from-green-400 to-cyan-400;
+    width: 100%;
+    animation: chart-flow 2.5s infinite linear;
+    animation-delay: var(--delay);
+}
+
+@keyframes chart-flow {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* 训练曲线动画 */
+.training-curve {
+    position: relative;
+    overflow: hidden;
+}
+.training-curve::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent 25%,
+        rgba(255,255,255,0.1) 50%,
+        transparent 75%
+    );
+    animation: wave 2s infinite linear;
+}
+
+@keyframes wave {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* 新增推理阶段颜色 */
+.bg-purple-900\/50 {
+    background-color: rgba(76, 29, 149, 0.5);
+}
+.text-purple-300 {
+    color: #d8b4fe;
+}
+.border-purple-500 {
+    border-color: #8b5cf6;
+}
+/* 知识图谱增强样式 */
+.knowledge-node {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.knowledge-node:hover {
+    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.6));
+    transform: scale(1.1);
+}
+
+.knowledge-link {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 3s linear forwards;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* 案例卡片新增样式 */
+.badge {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.show-details-btn {
+    @apply text-sm text-blue-400 hover:text-blue-300 transition-colors flex items-center;
+}
+
+.progress-bar {
+    @apply h-2 bg-gray-700/30 rounded-full overflow-hidden;
+}
+
+.progress-track {
+    @apply h-full transition-all duration-500 ease-out;
+}
+
+/* 新增样式 */
+.details-dropdown {
+    @apply overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)];
+}
+
+.show-details-btn {
+    @apply flex items-center bg-gray-700/20 hover:bg-gray-700/30 px-4 py-2 rounded-lg 
+           transition-colors duration-200;
+}
+
+.details-dropdown > div {
+    @apply bg-gray-800/90 backdrop-blur-sm rounded-lg shadow-xl border border-white/10;
+    animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-down {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
