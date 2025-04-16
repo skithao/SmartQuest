@@ -2,40 +2,64 @@ async function sendQuestion() {
     const question = document.getElementById('questionInput').value;
     const chatWindow = document.getElementById('chatWindow');
     
-    chatWindow.innerHTML += `<div class="loading-dots">机器人：正在思考<span>.</span><span>.</span><span>.</span></div>`;
+    if (!question.trim()) {
+        return;
+    }
+
+    chatWindow.innerHTML += `<div class="chat-message user-message">你：${question}</div>`;
+    chatWindow.innerHTML += `<div class="loading-dots chat-message bot-message">机器人：正在思考<span>.</span><span>.</span><span>.</span></div>`;
     
     try {
-        const response = await fetch(ZHIPU_API_URL, {
+        const response = await fetch('http://localhost:5000/chat', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ZHIPU_API_KEY.replace(' ', '')}` // 确保移除空格
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                "model": "chatglm_pro",
-                "messages": [ // 修正为数组格式
+                messages: [
                     {
-                        "role": "user",
-                        "content": question
+                        role: "user",
+                        content: question
                     }
-                ],
-                "temperature": 0.7
+                ]
             })
         });
 
         const data = await response.json();
-        if (data?.data?.choices?.[0]?.message?.content) {
-            const lastLoading = chatWindow.querySelector('.loading-dots:last-child');
-            lastLoading.outerHTML = `<p class="bot-message">机器人：${data.data.choices[0].message.content}</p>`;
+        
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
+        if (data?.choices?.[0]?.message?.content) {
+            const botResponse = data.choices[0].message.content;
+            const lastLoading = chatWindow.querySelector('.loading-dots');
+            if (lastLoading) {
+                lastLoading.outerHTML = `<div class="chat-message bot-message">机器人：${botResponse}</div>`;
+            }
         } else {
-            throw new Error('Invalid API response');
+            throw new Error('Invalid API response format');
         }
     } catch (error) {
-        const lastLoading = chatWindow.querySelector('.loading-dots:last-child');
-        lastLoading.outerHTML = `<p class="error-message">机器人：回答遇到技术问题，请稍后重试（错误码：${error.message.slice(0, 20)}）</p>`;
-        console.error('API Error:', error);
+        console.error('Chat Error:', error);
+        const lastLoading = chatWindow.querySelector('.loading-dots');
+        if (lastLoading) {
+            lastLoading.outerHTML = `<div class="chat-message error-message">机器人：抱歉，我遇到了问题（${error.message}）</div>`;
+        }
     }
+
+    // 清空输入框
     document.getElementById('questionInput').value = '';
+    
+    // 滚动到底部
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }
+
+// 添加按回车发送功能
+document.getElementById('questionInput')?.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        sendQuestion();
+    }
+});
 
 window.sendQuestion = sendQuestion;
