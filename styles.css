@@ -336,3 +336,78 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
+.chat-window {
+    scrollbar-width: thin;
+    scrollbar-color: #4b5563 #1f2937;
+}
+
+.chat-window::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 3px;
+}
+
+/* 聊天消息样式 */
+.chat-message {
+    margin: 12px 0;
+    padding: 12px 16px;
+    border-radius: 18px;
+    max-width: 85%;
+    word-wrap: break-word;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 机器人消息样式 */
+.bot-message {
+    background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
+    color: #f3f4f6;
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* 用户消息样式 */
+.user-message {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+    animation: slideInRight 0.5s ease-out;
+}
+
+/* 动态宽度调整 */
+.chat-message p {
+    max-width: fit-content;
+    display: inline-block;
+}
+
+/* 加载动画 */
+.loading-dots::after {
+    content: '...';
+    animation: dots 1.5s steps(5, end) infinite;
+}
+
+/* 新增动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 消息时间戳 */
+.message-time {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 4px;
+    display: block;
+}
+

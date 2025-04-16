@@ -14,7 +14,13 @@ logger.info("Loading environment variables...")
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": os.getenv('CORS_ORIGINS', '*')}})
+CORS(app, resources={
+    r"/*": {
+        "origins": ["http://localhost:5500", "http://127.0.0.1:5500"],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # Get API key from environment variables
 ZHIPU_API_KEY = os.getenv('ZHIPU_API_KEY')
