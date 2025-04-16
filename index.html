@@ -532,9 +532,9 @@
 <!-- 案例展示 -->
 <section id="cases" class="min-h-screen py-20 px-10">
     <h2 class="text-4xl font-bold mb-8 text-center">案例展示</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="flex flex-col md:flex-row gap-8">  <!-- 修改为flex布局 -->
         <!-- 智能客服案例 -->
-        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all">
+        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all flex-1">
             <div class="absolute -top-3 right-4">
                 <span class="badge bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">实时响应</span>
             </div>
@@ -575,7 +575,7 @@
             </div>
         </div>
         <!-- 论文辅助案例 -->
-        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all" 
+        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all flex-1" 
      data-aos-delay="200">
         <div class="absolute -top-3 right-4">
             <span class="badge bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">AI协作</span>
@@ -620,7 +620,7 @@
         </div>
 
         <!-- 法律咨询案例 -->
-        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all" 
+        <div class="card animate-slide-up group relative hover:transform hover:scale-[1.02] transition-all flex-1" 
      data-aos-delay="400">
         <div class="absolute -top-3 right-4">
             <span class="badge bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm">合规验证</span>

@@ -13,9 +13,11 @@
   - [快速开始](#快速开始)
     - [基础环境](#基础环境)
     - [一键启动](#一键启动)
+    - [Docker部署](#docker部署)
   - [详细部署指南](#详细部署指南)
     - [Windows系统](#windows系统)
     - [开发模式](#开发模式)
+    - [Docker开发](#docker开发)
   - [模块使用说明](#模块使用说明)
     - [对话交互示例](#对话交互示例)
     - [文本生成参数](#文本生成参数)
@@ -90,6 +92,18 @@ pip install -r requirements.txt
 npm run dev
 ```
 
+### Docker部署
+```bash
+# 构建镜像
+docker build -t smartquest .
+
+# 运行容器
+docker run -p 5000:5000 -p 3000:3000 smartquest
+
+# 开发模式
+docker run -p 5000:5000 -p 3000:3000 -e FLASK_ENV=development smartquest
+```
+
 ## 详细部署指南
 ### Windows系统
 1. 安装[Python 3.9](https://www.python.org/downloads/)
@@ -107,6 +121,13 @@ npm run dev
 # 后端调试模式
 flask run --debug
 ```
+
+### Docker开发
+```bash
+# 使用Docker开发模式
+docker run -p 5000:5000 -p 3000:3000 -v $(pwd):/app -e FLASK_ENV=development smartquest
+```
+
 
 ## 模块使用说明
 ### 对话交互示例
@@ -219,3 +240,4 @@ A: 修改`.env`中的PORT配置
 |------|------------|-------------------------|
 | 1.1  | 2024-03-20 | 新增法律咨询模块        |
 | 1.0  | 2024-03-15 | 项目初始版本发布        |
+
