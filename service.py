@@ -1,18 +1,21 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import requests
+from zhipuai import ZhipuAI
+import os
 from dotenv import load_dotenv
-load_dotenv()  # 加载环境变量
+
+load_dotenv()  # Load environment variables
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": os.getenv('CORS_ORIGINS', '*')}})
 
-# 从环境变量获取API密钥
+# Get API key from environment variables
 ZHIPU_API_KEY = os.getenv('ZHIPU_API_KEY')
 if not ZHIPU_API_KEY:
-    raise ValueError("未配置ZHIPU_API_KEY，请在.env文件中配置")
+    raise ValueError("ZHIPU_API_KEY not configured in .env file")
 
-API_KEY = "1be3a7964e95470e9a3aa181e2472403.klHkoXaE2ZRaMNpZ".strip()  # 添加去除空格处理
+# Initialize ZhipuAI client
+client = ZhipuAI(api_key=ZHIPU_API_KEY)
 
 @app.route('/chat', methods=['POST'])
 def chat_proxy():
@@ -21,21 +24,22 @@ def chat_proxy():
         if not data or 'messages' not in data:
             return jsonify({"error": "Invalid request format"}), 400
             
-        response = requests.post(
-            "https://open.bigmodel.cn/api/paas/v3/model-api/chat/completions",
-            headers={
-                "Authorization": f"Bearer {API_KEY}",  # 确保使用处理后的密钥
-                "Content-Type": "application/json"
-            },
-            json={
-                "model": "chatglm_pro",
-                "messages": data['messages'],
-                "temperature": 0.7
-            }
+        response = client.chat.completions.create(
+            model="glm-4-airx",  # Using the latest model
+            messages=data['messages'],
+            temperature=0.7
         )
-        # 添加详细错误日志
-        print("API Response:", response.status_code, response.text)
-        return jsonify(response.json())
+        
+        # Extract the response message
+        response_data = {
+            "choices": [{
+                "message": response.choices[0].message,
+                "finish_reason": response.choices[0].finish_reason
+            }],
+            "usage": response.usage
+        }
+        
+        return jsonify(response_data)
     except Exception as e:
         print("Proxy Error:", str(e))
         return jsonify({"error": str(e)}), 500
